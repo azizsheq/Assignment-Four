@@ -80,7 +80,16 @@ nav ul li a:hover, a.active{
 }
 .booking-form input{
     width: 100%;
-    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background: #F3F5FF;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+#booking-info{
+    width: 100%;
+    display: none;
     padding: 10px;
     border-radius: 5px;
     border: none;
@@ -101,7 +110,7 @@ nav ul li a:hover, a.active{
     align-items: center;
 }
 .inp-width{
-    min-width: 300px;
+    min-width: 200px;
 }
 .plus-minus-btn{
     color: #3352F2;
@@ -116,7 +125,6 @@ nav ul li a:hover, a.active{
     gap: 10px;
 }
 .btn-style{
-    display: block;
     width: 100%;
     padding: 10px;
     border-radius: 5px;
@@ -125,7 +133,28 @@ nav ul li a:hover, a.active{
     font-weight: 500;
     background-color:  #E33741;
 }
+.btn-confirm{
+    width: 75%;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    background-color: green;
+}
 .amount{
     display: flex;
     justify-content: space-between;
+}
+.display-booking-info{
+    display: inline;
+    justify-content: space-between;
+    padding: 5px;
+    margin: 10px;
+}
+.booking-info-span{
+    float: right;
+    display: block;
 }

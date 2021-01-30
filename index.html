@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curise Booking</title>
+    <title>Cruise Booking</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
@@ -39,58 +39,67 @@
         </div>
 
 
-        <div class="booking-form">
+        <div id="booking-div" class="booking-form">
             <h3>Book Ocean Time</h3>
             <div class="input-group">
-                <label for="">Flying From</label>
-                <input class="inp-style" type="text" name="" placeholder="Dhaka, Bangladesh">
+                <label for="">Departing From</label>
+                <input id="depart-info" class="inp-style" type="text" name="" placeholder="Enter Port / City Name">
             </div>
             <div class="input-group">
-                <label for="">Flying To</label>
-                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+                <label for="">Destination</label>
+                <input id="destination-info" class="inp-style" type="text" name="" placeholder="Enter Port / City Name">
             </div>
             <div class="inputs">
                 <div class="input-group">
                     <label" for="">Departure</label>
-                        <input class="inp-style" type="date" name="">
+                        <input id="depart-date" class="inp-style" type="date" name="">
                 </div>
                 <div class="input-group">
                     <label for="">Return</label>
-                    <input class="inp-style" type="date" name="">
+                    <input id="return-date" class="inp-style" type="date" name="">
                 </div>
             </div>
+
+            <!-- division for the first class information  -->
             <div class="input-group f-class">
                 <div>
                     <label for="">First Class ($150)</label>
-                    <input class="inp-style inp-width" type="text" name="" value="1">
+                    <input id="firstClass-display" class="inp-style inp-width" type="text" name="" value="1">
                     <!-- <input class="inp-style inp-width" type="number" name=""> -->
                 </div>
                 <div class="plus-minus-btn">
-                    <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                    <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                    <button id="firstClass-increase" onclick="addRemoveTicket('firstClass', true)"
+                        class="btn btn-default"><i class="fas fa-plus"></i></button>
+                    <button id="firstClass-decrease" onclick="addRemoveTicket('firstClass', false)"
+                        class="btn btn-default"><i class="fas fa-minus"></i></button>
                     <!-- <p>+ -</p> -->
                 </div>
             </div>
 
+            <!-- division for the economy class information  -->
             <div class="input-group f-class">
                 <div>
                     <label for="">Economy ($100)</label>
-                    <input class="inp-style inp-width" type="text" name="" value="1">
+                    <input id="economyClass-display" class="inp-style inp-width" type="text" name="" value="1">
                     <!-- <input class="inp-style inp-width" type="number" name=""> -->
                 </div>
                 <div class="plus-minus-btn">
-                    <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                    <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                    <button id="economyClass-increase" onclick="addRemoveTicket('economyClass', true)"
+                        class="btn btn-default"><i class="fas fa-plus"></i></button>
+                    <button id="economyClass-decrease" onclick="addRemoveTicket('economyClass', false)"
+                        class="btn btn-default"><i class="fas fa-minus"></i></button>
                     <!-- <p> <span>+</span> <span>-</span> </p> -->
                 </div>
             </div>
+
+            <!-- division for the calculation information  -->
             <div class="calculations">
                 <div class="amount">
                     <div class="left">
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p id="subtotal-display">$350</p>
                     </div>
                 </div>
 
@@ -99,26 +108,177 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p id="vat-display">$35</p>
                     </div>
                 </div>
                 <hr>
+
                 <div class="amount">
                     <div class="left">
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p id="total-display">$385</p>
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+
+            <button id="bookNow-btn" class="btn-style">Book Now</button>
+        </div>
+
+        <!-- division to display booking information  -->
+        <div id="booking-info" class="">
+            <h2 style="color: green; text-align: center;">Booking Details</h2>
+            <h3 style="text-align: center;">Book Ocean Time</h3>
+            <hr>
+            <div class="display-booking-info">
+                <div>
+                    Departing From : <span id="departFrom" class="booking-info-span">here</span>
+                </div>
+                <div>
+                    Destination : <span id="destinationTo" class="booking-info-span">here</span>
+                </div>
+                <br>
+                <div>
+                    Departure Date : <span id="departDate" class="booking-info-span">here</span>
+                </div>
+                <div>
+                    Return Date : <span id="returnDate" class="booking-info-span">here</span>
+                </div>
+                <br>
+                <div>
+                    First Class ($150) Ticket Quantity : <span id="firstClassQty" class="booking-info-span">here</span>
+                </div>
+                <div>
+                    Economy Class ($100) Ticket Quantity : <span id="economyClassQty"
+                        class="booking-info-span">here</span>
+                </div>
+                <br>
+                <div>
+                    Subtotal : <span id="subtotalAmount" class="booking-info-span">000</span>
+                </div>
+                <div>
+                    Charge 10% VAT : <span id="vatAmount" class="booking-info-span">000</span>
+                </div>
+                <hr>
+                <div>
+                    <b>Total : <span id="totalAmount" class="booking-info-span">000</span></b>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <button id="confirm-btn" class="btn-confirm">Click to Confirm</button>
+            </div>
         </div>
     </main>
     <!--Thank You-->
 
     <script>
+        // addRemoveTicket function 
+        // a function to control the increase and decrease of the ticket on basis of the button event handler 
+        function addRemoveTicket(ticketClass, isIncrease) {
+            const initNumOfTicket = document.getElementById(ticketClass + "-display").value;
+            const ticketQuantity = parseInt(initNumOfTicket);
+            let newTicketQuantity = 0;
+            if (isIncrease == true) {
+                newTicketQuantity = ticketQuantity + 1;
+            }
+            if (isIncrease == false && ticketQuantity > 1) {
+                newTicketQuantity = ticketQuantity - 1;
+            }
+            document.getElementById(ticketClass + "-display").value = newTicketQuantity;
 
+            calculateTotal();   // calling the function to display the subtotal, vat and total
+        }
+
+
+        // calculateTotal function 
+        // a function to calculate the subtotal, VAT and total
+        function calculateTotal() {
+            // ticket prices
+            const firstClassTicketPrice = 150;
+            const economyClassTicketPrice = 100;
+
+            const firstClassTicketQuantity = getNumberOfTicket("firstClass");
+            const economyClassTicketQuantity = getNumberOfTicket("economyClass");
+
+            // calculating subtotal
+            const subtotal = (firstClassTicketPrice * firstClassTicketQuantity) + (economyClassTicketPrice * economyClassTicketQuantity);
+            document.getElementById("subtotal-display").innerText = "$" + subtotal;
+
+            // calculating VAT
+            const vatCharge = 0.10;
+            const totalVAT = Math.round(subtotal * vatCharge);
+            document.getElementById("vat-display").innerText = "$" + totalVAT;
+
+            // calculating total
+            const total = subtotal + totalVAT;
+            document.getElementById("total-display").innerText = "$" + total;
+        }
+
+
+        // getNumberOfTicket function 
+        // a function to get the value from the html element and return as an integer
+        function getNumberOfTicket(ticketClass) {
+            const ticketValue = document.getElementById(ticketClass + "-display").value;
+            const ticketQuantity = parseInt(ticketValue);
+            return ticketQuantity;
+        }
+
+
+        document.getElementById("bookNow-btn").addEventListener("click", function () {
+            document.getElementById("booking-div").style.display = "none";
+            document.getElementById("booking-info").style.display = "block";
+
+            getInputValues();
+        })
+
+
+        function getInputValues(){
+            const departFrom = document.getElementById("depart-info").value;
+            document.getElementById("departFrom").innerText = departFrom;
+
+            const destinationTo = document.getElementById("destination-info").value;
+            document.getElementById("destinationTo").innerText = destinationTo;
+
+            const dateOfDepart = document.getElementById("depart-date").value;
+            document.getElementById("departDate").innerText = dateOfDepart;
+
+            const dateOfReturn = document.getElementById("return-date").value;
+            document.getElementById("returnDate").innerText = dateOfReturn;
+
+            const numOfFirstClass = document.getElementById("firstClass-display").value;
+            document.getElementById("firstClassQty").innerText = numOfFirstClass;
+
+            const numOfEconomyClass = document.getElementById("economyClass-display").value;
+            document.getElementById("economyClassQty").innerText = numOfEconomyClass;
+
+            const getSubtotal = document.getElementById("subtotal-display").innerText;
+            document.getElementById("subtotalAmount").innerText = getSubtotal;
+
+            const getVat = document.getElementById("vat-display").innerText;
+            document.getElementById("vatAmount").innerText = getVat;
+
+            const getTotal = document.getElementById("total-display").innerText;
+            document.getElementById("totalAmount").innerText = getTotal;
+        }
+
+
+        document.getElementById("confirm-btn").addEventListener("click", function () {
+            document.getElementById("booking-div").style.display = "block";
+            document.getElementById("booking-info").style.display = "none";
+
+            setDefaultValue();
+        })
+
+
+        function setDefaultValue(){
+            document.getElementById("depart-info").value = "";
+            document.getElementById("destination-info").value = "";
+            document.getElementById("depart-date").value = "";
+            document.getElementById("return-date").value = "";
+            document.getElementById("firstClass-display").value = 1;
+            document.getElementById("economyClass-display").value = 1;
+        }
     </script>
 </body>
 
