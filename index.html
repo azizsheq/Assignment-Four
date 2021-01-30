@@ -35,9 +35,9 @@
             <h1>Cruise Queen</h1>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book./p>
+                scrambled it to make a type specimen book.
+            </p>
         </div>
-
 
         <div id="booking-div" class="booking-form">
             <h3>Book Ocean Time</h3>
@@ -122,8 +122,7 @@
                     </div>
                 </div>
             </div>
-
-            <button id="bookNow-btn" class="btn-style">Book Now</button>
+            <button id="bookNow-btn" onclick="btnActivity('bookNow')" class="btn-style">Book Now</button>
         </div>
 
         <!-- division to display booking information  -->
@@ -166,11 +165,11 @@
                 </div>
             </div>
             <div style="display: flex; justify-content: center; align-items: center;">
-                <button id="confirm-btn" class="btn-confirm">Click to Confirm</button>
+                <button id="confirm-btn" onclick="btnActivity('confirm')" class="btn-confirm">Click to Confirm</button>
             </div>
         </div>
+        <!-- END of division to display booking information  -->
     </main>
-    <!--Thank You-->
 
     <script>
         // addRemoveTicket function 
@@ -225,31 +224,45 @@
         }
 
 
-        document.getElementById("bookNow-btn").addEventListener("click", function () {
-            document.getElementById("booking-div").style.display = "none";
-            document.getElementById("booking-info").style.display = "block";
-
-            getInputValues();
-        })
+        // a function to get id and set some style for display 
+        function setStyle(id, style) {
+            document.getElementById(id).style.display = style;
+        }
 
 
-        function getInputValues(){
-            const departFrom = document.getElementById("depart-info").value;
+        // a function to add event handler to the buttons and set some changes
+        function btnActivity(btnId) {
+            if (btnId == "bookNow") {
+                setStyle("booking-div", "none");
+                setStyle("booking-info", "block");
+                getInputValues();
+            }
+            if (btnId == "confirm") {
+                setStyle("booking-div", "block");
+                setStyle("booking-info", "none");
+                setDefaultValue();
+            }
+        }
+
+
+        // a function to get values using another function and set their values
+        function getInputValues() {
+            const departFrom = receiveValue("depart-info");
             document.getElementById("departFrom").innerText = departFrom;
 
-            const destinationTo = document.getElementById("destination-info").value;
+            const destinationTo = receiveValue("destination-info");
             document.getElementById("destinationTo").innerText = destinationTo;
 
-            const dateOfDepart = document.getElementById("depart-date").value;
+            const dateOfDepart = receiveValue("depart-date");
             document.getElementById("departDate").innerText = dateOfDepart;
 
-            const dateOfReturn = document.getElementById("return-date").value;
+            const dateOfReturn = receiveValue("return-date");
             document.getElementById("returnDate").innerText = dateOfReturn;
 
-            const numOfFirstClass = document.getElementById("firstClass-display").value;
+            const numOfFirstClass = receiveValue("firstClass-display");
             document.getElementById("firstClassQty").innerText = numOfFirstClass;
 
-            const numOfEconomyClass = document.getElementById("economyClass-display").value;
+            const numOfEconomyClass = receiveValue("economyClass-display");
             document.getElementById("economyClassQty").innerText = numOfEconomyClass;
 
             const getSubtotal = document.getElementById("subtotal-display").innerText;
@@ -263,15 +276,15 @@
         }
 
 
-        document.getElementById("confirm-btn").addEventListener("click", function () {
-            document.getElementById("booking-div").style.display = "block";
-            document.getElementById("booking-info").style.display = "none";
+        // a function to get element id and return the value
+        function receiveValue(id) {
+            const value = document.getElementById(id).value;
+            return value;
+        }
 
-            setDefaultValue();
-        })
 
-
-        function setDefaultValue(){
+        // a function to set all the input into their default values
+        function setDefaultValue() {
             document.getElementById("depart-info").value = "";
             document.getElementById("destination-info").value = "";
             document.getElementById("depart-date").value = "";
